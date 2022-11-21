@@ -3,12 +3,6 @@ const fs = require('fs');
 const cTable = require('console.table')
 const db = require("./config/connection")
 
-const getEmp = () => {
-  return db.promise().query('SELECT * FROM employee')
-}
-
-
-
 const menu = () => {
   return inquirer.prompt([
     {
@@ -18,8 +12,9 @@ const menu = () => {
       choices: ["View all departments", "View all roles", 'View all employees', 'Add a department', "Add a role", "Add an employee", "Update an employee role"]
     }
   ]).then((data) => {
-    if (data.menu === "View all employees") {
+    if (data.options === "View all employees") {
       getEmp().then((empData) => {
+        console.log(empData)
         console.table(empData[0])
         menu();
       })
@@ -33,35 +28,40 @@ const menu = () => {
         console.table(deptData[0])
         menu();
       })
-    }else if (data.options === 'Add a department') {
+    } else if (data.options === "View all roles") {
+      getRole().then((roleData) => {
+        console.log(roleData)
+        console.table(roleData[0])
+        menu();
+      })
+    } else if (data.options === 'Add a department') {
       addDept().then(deptData => {
         console.log(deptData)
-
         console.table(deptData[0])
         menu();
-      }) .catch(error => console.log (error))
-  
-
+      }).catch(error => console.log(error))
     }
-  })}
+  })
+}
 const addDept = () => {
   return db.promise().query('Select * FROM department')
 }
-
-
 const getDept = () => {
   return db.promise().query('Select * FROM department')
 }
-// .then((data) => {
-//   if (data.menu === "View all departments") {
+const addRole = () => {
+  return db.promise().query('Select * FROM role')
+}
+const getRole = () => {
+  return db.promise().query('SELECT * FROM role')
+}
+const getEmp = () => {
+  return db.promise().query('SELECT * FROM employee')
+}
 
-//   }
 
-  //****SHOW ROLE TABLE{
-//   when: (input) => input.options === "View all roles"
-// },
 
-  //******SHOW JOINED TABLE{
+//******SHOW JOINED TABLE{
 //   {
 //     type: 'input',
 //     name: 'school',
@@ -80,12 +80,12 @@ const getDept = () => {
 //       message: "What is the name of the department?",
 //       when: (input) => input.options === "Add a department"
 //     },
-    //*********Add department to database{
+//*********Add department to database{
 
-    // WHEN I choose to add a role
-    // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+// WHEN I choose to add a role
+// THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 
-    //********Add role to database
+//********Add role to database
 
 //     let roleArr = []
 // const rolePrompt = () => {
@@ -110,9 +110,9 @@ const getDept = () => {
 //         when: (input) => input.options === "Add a role"
 //       },
 
-      //WHEN I choose to add an employee
-      // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-      //**********Add employee to database{
+//WHEN I choose to add an employee
+// THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+//**********Add employee to database{
 //       Let employeeArr[]
 
 
@@ -145,7 +145,6 @@ const getDept = () => {
 // },
 //****************Update Employee in database
 
-// 
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 // const employeeRolePrompt = () => {
@@ -159,8 +158,6 @@ const getDept = () => {
 //     },
 //     //********UPDATE DATABASE with updated employee
 
-
-//     menu.complete();
 
 menu();
 
