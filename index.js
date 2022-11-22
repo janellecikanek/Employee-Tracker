@@ -20,6 +20,8 @@ const menu = () => {
       })
     } else if (data.options === "Add an employee") {
       return addEmp();
+    } else if (data.options === "Add a role") {
+      return addRole();
     } else if (data.options === "Update an employee role") {
       return updateRole();
     } else if (data.options === "View all departments") {
@@ -35,16 +37,14 @@ const menu = () => {
         menu();
       })
     } else if (data.options === 'Add a department') {
-      addDept().then(deptData => {
-        console.log(deptData)
-        console.table(deptData[0])
-        menu();
-      }).catch(error => console.log(error))
+      addDept()
+      // .then(deptData => {
+      //   console.log(deptData)
+      //   console.table(deptData[0])
+      //   menu();
+      // }).catch(error => console.log(error))
     }
   })
-}
-const addDept = () => {
-  return db.promise().query('Select * FROM department')
 }
 const getDept = () => {
   return db.promise().query('Select * FROM department')
@@ -57,8 +57,27 @@ const getRole = () => {
 }
 const getEmp = () => {
   return db.promise().query('SELECT * FROM employee')
-}
+};
 
+
+
+const addDept = () => {
+ // return db.promise().query('Select * FROM department')
+  inquirer.prompt([
+    {
+    type: 'input',
+        name: 'dept',
+        message: "What's your department name",
+      },
+    ]).then(function (deptName) {
+      console.log(deptName)
+      db.query("INSERT into department(name) VALUES (?)", deptName.dept, function(err, result){
+        console.log(result)
+      } );
+    })
+
+
+  }
 
 
 //******SHOW JOINED TABLE{
@@ -71,15 +90,7 @@ const getEmp = () => {
 
 //   when: (input) => input.options === "View all employees"
 // },
-//   let deptArr[]
-// const departmentPrompt = () => {
-//   return inquirer.prompt([
-//     {
-//       type: 'input',
-//       name: 'deptName',
-//       message: "What is the name of the department?",
-//       when: (input) => input.options === "Add a department"
-//     },
+
 //*********Add department to database{
 
 // WHEN I choose to add a role
@@ -158,6 +169,20 @@ const getEmp = () => {
 //     },
 //     //********UPDATE DATABASE with updated employee
 
+// type: 'input',
+// name: 'deptName',
+// message: "What is the name of the department?",
+//  when: (input) => input.options === "Add a department")
+// ]}).then(function (data) {
+// const query = "INSERT INTO department SET ?";
+// db.query(
+// query, {
+// name: data.deptName
+// },
+// )
+// console.table(data);
+// }
+// );
+
 
 menu();
-
