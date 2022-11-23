@@ -85,90 +85,83 @@ const addRole = () => {
       name: 'roleSalary',
       message: "What is the salary for this role?",
     },
-  ]).then(function (title) {
-    console.log(title)
-    db.query("INSERT into role(title) VALUES (?)", title.roleName, function (err, result) {
-      console.log(result)
-    });
-  })
-    .then(function (salary) {
-      console.log(salary)
-      db.query("INSERT into role(salary) VALUES (?)", salary.roleSalary, function (err, result) {
+  ]).then(function (res) {
+    //console.log(title)
+    db.query("INSERT into role SET ?", {
+      title: res.title,
+      salary: res.salary,
+    },
+      function (err, result) {
         console.log(result)
         menu();
       });
-    })
-
-  //   ]).then(function (salary) {
-  //     console.log(salary)
-  //     db.query("INSERT into role SET VALUES (?)", salary.roleSalary, function (err, result) {
-  //       console.log(result)
-  //     });
-  //   })
-  // }
-
-  //WHEN I choose to add an employee
-  // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-  //**********Add employee to database{
-  //       Let employeeArr[]
-
-
-  //   const employeePrompt = () => {
-  //       return inquirer.prompt(
-  //         type: 'input',
-  //         name: 'employeeFirstName',
-  //         message: "What is the first name of the employee?",
-  //         when: (input) => input.options === "Add an employee"
-  // },
-
-  //       {
-  //         type: 'input',
-  //         name: 'employeeLastName',
-  //         message: "What is the last name of the employee?",
-  //         when: (input) => input.options === "Add an employee"
+  });
+};
+;
+// const addEmp = () => {
+  //   return db.promise().query('Select * FROM role')
+  // inquirer.prompt([
+  //   {
+  //     type: 'input',
+  //     name: 'roleName',
+  //     message: "What is the name of the role?",
   //   },
-
-  //     {
-  //       type: 'input',
-  //       name: 'employeeRole',
-  //       message: "What is the role of the employee?",
-  //       when: (input) => input.options === "Add an employee"
-  // },
+  //   {
+  //     type: 'input',
+  //     name: 'roleSalary',
+  //     message: "What is the salary for this role?",
+  //   },
+  //   {
+  //     type: 'input',
+  //     name: 'employeeFirstName',
+  //     message: "What is the first name of the employee?",
+  //   },
+  //   {
+  //     type: 'input',
+  //     name: 'employeeLastName',
+  //     message: "What is the last name of the employee?",
+  //   },
+  //   {
+  //     type: 'input',
+  //     name: 'employeeRole',
+  //     message: "What is the role of the employee?",
+  //   },
   //   {
   //     type: 'input',
   //     name: 'employeeMgr',
   //     message: "Who is the manager of the employee?",
-  //     when: (input) => input.options === "Add an employee"
-  // },
-  //****************Update Employee in database
+  //   },
+  //  ])
+//.then(function (res) {
+//     //console.log(title)
+//     //db.query("INSERT into employee SET ?", {
+//       first_name: res.employeeFirstName,
+//       last_name: res.employeeLastName,
+//     },
+      // function (err, result) {
+      //   console.log(result)
+      //   menu();
+      //  });
+//   });
+// };
+// ;
+//WHEN I choose to add an employee
+// THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 
-  // WHEN I choose to update an employee role
-  // THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
-  // const employeeRolePrompt = () => {
-  //   return inquirer.prompt(
-  //     {
-  //       type: "list",
-  //       name: "employeeUpdate",
-  //       message: "What employee would you like to update?",
-  //       //choices: [****LIST ARRAY OF CURRENT EMPLOYEES]
-  //       when: (input) => input.options === "Update an employee role"
-  //     },
-  //     //********UPDATE DATABASE with updated employee
+//       Let employeeArr[]
+//****************Update Employee in database
 
-  // type: 'input',
-  // name: 'deptName',
-  // message: "What is the name of the department?",
-  //  when: (input) => input.options === "Add a department")
-  // ]}).then(function (data) {
-  // const query = "INSERT INTO department SET ?";
-  // db.query(
-  // query, {
-  // name: data.deptName
-  // },
-  // )
-  // console.table(data);
-  // }
-  // );
+// WHEN I choose to update an employee role
+// THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
+// const employeeRolePrompt = () => {
+//   return inquirer.prompt(
+//     {
+//       type: "list",
+//       name: "employeeUpdate",
+//       message: "What employee would you like to update?",
+//       //choices: [****LIST ARRAY OF CURRENT EMPLOYEES]
+//       when: (input) => input.options === "Update an employee role"
+//     },
+//     //********UPDATE DATABASE with updated employee
 
-
-  menu();
+menu();
