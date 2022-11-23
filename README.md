@@ -26,11 +26,9 @@ This project requires the Inquirer, MySQL2 and console.table.
 
 ## Usage
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+https://drive.google.com/file/d/1z0op3AEi9RSZ0J2Hs9kAOvSOojzQNiM7/view
+ 
+ <img src="image/ScreenShotEmployeeTracker.png" alt="Screen Shot">
 
 ## Credits
 
