@@ -79,6 +79,7 @@ const addDept = () => {
     console.log(deptName)
     db.query("INSERT into department(name) VALUES (?)", deptName.dept, function (err, result) {
       console.log(result)
+      menu();
     });
   })
 }
