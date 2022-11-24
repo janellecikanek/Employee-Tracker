@@ -26,7 +26,7 @@ This project requires the Inquirer, MySQL2 and console.table.
 
 ## Usage
 
-https://drive.google.com/file/d/1z0op3AEi9RSZ0J2Hs9kAOvSOojzQNiM7/view
+https://drive.google.com/file/d/17C3l3BOl8LQ4J9nkGgUEUqbK1rJ855hI/view
  
  <img src="image/ScreenShotEmployeeTracker.png" alt="Screen Shot">
 
