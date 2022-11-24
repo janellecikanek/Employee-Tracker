@@ -176,22 +176,13 @@ const addEmp = () => {
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
-const selectEmployee = () => {
-  let employeeArr = []
-  const query = "SELECT first_name, last_name FROM employee"
-  db.query(query, function (err, res) {
-    if (err) throw err
-   } )
-return employeeArr
-}
-
-const updateEmp = () => {
+const updateRole = () => {
   inquirer.prompt([
     {
       type: 'list',
       name: 'employeeUpdate',
       message: "What employee would you like to update?",
-      choices: selectEmployee(),
+      choices: getEmp(),
     },
     {
       type: 'list',
@@ -207,10 +198,12 @@ const updateEmp = () => {
       last_name: res.employeeLastName,
       role_id: roleId,
     },
-    function (err, result) {
-      if (err) throw err
-      console.log(result)
-      menu();
-    });
-});
+      function (err, result) {
+        if (err) throw err
+        console.log(result)
+        menu();
+      });
+  });
 };
+
+menu();
